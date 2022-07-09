@@ -1,24 +1,9 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using TweetAPI.Data;
 using TweetAPI.Config;
-using Microsoft.OpenApi.Models;
+using TweetAPI.Installers;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DBContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<DBContext>();
-builder.Services.AddControllersWithViews();
-builder.Services.AddSwaggerGen(temp =>
-{
-    temp.SwaggerDoc("v1", new OpenApiInfo { Title = "Tweet REST API", Version = "v1" });
-});
+builder.Services.ServicesInit(builder.Configuration);
 
 var app = builder.Build();
 
@@ -32,7 +17,7 @@ else
     app.UseHsts();
 }
 
-var swagConfig = new SwaggerOptions();
+SwaggerOptions swagConfig = new SwaggerOptions();
 builder.Configuration.GetSection(nameof(SwaggerOptions)).Bind(swagConfig);
 
 app.UseSwaggerUI(config =>
