@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TweetAPI.Data;
 using Microsoft.OpenApi.Models;
+using TweetAPI.Services;
 
 namespace TweetAPI.Installers
 {
@@ -21,7 +22,7 @@ namespace TweetAPI.Installers
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<DBContext>();
 
-            //services.AddControllersWithViews();
+            services.AddScoped<IPostService, PostService>();
 
             services.AddSwaggerGen(temp =>
             {

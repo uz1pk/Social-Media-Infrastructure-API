@@ -12,6 +12,8 @@
             public const string Create = BaseRoute + "/posts";
 
             public const string Get = BaseRoute + "/posts/{postId}";
+            public const string Update = BaseRoute + "/posts{postId}";
+            public const string Delete = BaseRoute + "/posts{postId}";
         }
     }
 }
