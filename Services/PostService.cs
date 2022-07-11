@@ -18,7 +18,7 @@ namespace TweetAPI.Services
             return await _dataContext.Posts.ToListAsync();
         }
 
-        public async Task<Post> GetPostByIdAsync(Guid postId)
+        public async Task<Post?> GetPostByIdAsync(Guid postId)
         {
             return await _dataContext.Posts.SingleOrDefaultAsync(x => x.Id == postId);
         }
@@ -34,6 +34,12 @@ namespace TweetAPI.Services
         public async Task<bool> DeletePostAsync(Guid postId)
         {
             var post = await GetPostByIdAsync(postId);
+
+            if (post == null)
+            {
+                return false;
+            }
+
             _dataContext.Posts.Remove(post);
             var deleted = await _dataContext.SaveChangesAsync();
 

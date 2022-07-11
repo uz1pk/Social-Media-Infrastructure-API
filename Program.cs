@@ -17,6 +17,8 @@ else
     app.UseHsts();
 }
 
+app.UseAuthentication();
+
 SwaggerOptions swagConfig = new SwaggerOptions();
 builder.Configuration.GetSection(nameof(SwaggerOptions)).Bind(swagConfig);
 
