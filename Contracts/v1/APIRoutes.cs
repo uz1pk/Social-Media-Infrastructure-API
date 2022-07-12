@@ -15,5 +15,13 @@
             public const string Update = BaseRoute + "/posts{postId}";
             public const string Delete = BaseRoute + "/posts{postId}";
         }
+
+        public static class AuthRoutes
+        {
+            public const string Login = BaseRoute + "/auth/login";
+
+            public const string Register = BaseRoute + "/auth/register";
+        }   
+
     }
 }

@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TweetAPI.Config;
 using TweetAPI.Installers;
+using TweetAPI.Options;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -17,24 +21,26 @@ else
     app.UseHsts();
 }
 
-app.UseAuthentication();
-
 SwaggerOptions swagConfig = new SwaggerOptions();
 builder.Configuration.GetSection(nameof(SwaggerOptions)).Bind(swagConfig);
 
-app.UseSwaggerUI(config =>
-{
-    config.SwaggerEndpoint(swagConfig.UIEndpoint, swagConfig.Description);
-});
 app.UseSwagger(config =>
 {
     config.RouteTemplate = swagConfig.JsonRoute;
+});
+app.UseSwaggerUI(config =>
+{
+    config.SwaggerEndpoint(swagConfig.UIEndpoint, swagConfig.Description);
 });
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseAuthentication();
+
 app.UseRouting();
+
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

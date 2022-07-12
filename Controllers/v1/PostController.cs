@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TweetAPI.Contracts.v1;
 using TweetAPI.Contracts.v1.Requests;
 using TweetAPI.Contracts.v1.Responses;
 using TweetAPI.Domain;
 using TweetAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace TweetAPI.Controllers.v1
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PostController : Controller
     {
         private readonly IPostService _postService;
