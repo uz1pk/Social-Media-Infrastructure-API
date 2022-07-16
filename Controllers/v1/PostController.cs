@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using TweetAPI.Contracts.v1;
 using TweetAPI.Contracts.v1.Requests;
 using TweetAPI.Contracts.v1.Responses;
 using TweetAPI.Domain;
 using TweetAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using TweetAPI.Extensions;
 
 namespace TweetAPI.Controllers.v1
 {
@@ -28,7 +30,15 @@ namespace TweetAPI.Controllers.v1
         [HttpPut(APIRoutes.Posts.Update)]
         public async Task<IActionResult> Update([FromRoute]Guid postId, [FromBody] UpdatePostRequest request)
         {
-            var post = new Post { Id = postId, Name = request.Name };
+            var isCorrectUser = await _postService.CorrectUserAsync(postId, HttpContext.GetUserId());
+
+            if (!isCorrectUser)
+            {
+                return BadRequest(new { error = "Post not associated with this ID" });
+            }
+
+            var post = await _postService.GetPostByIdAsync(postId);
+            post.Name = request.Name;
 
             var updated = await _postService.UpdatePostAsync(post);
 
@@ -43,6 +53,13 @@ namespace TweetAPI.Controllers.v1
         [HttpDelete(APIRoutes.Posts.Delete)]
         public async Task<IActionResult> Delete([FromRoute] Guid postId)
         {
+            var isCorrectUser = await _postService.CorrectUserAsync(postId, HttpContext.GetUserId());
+
+            if (!isCorrectUser)
+            {
+                return BadRequest(new { error = "Post not associated with this ID" });
+            }
+
             var deleted = await _postService.DeletePostAsync(postId);
 
             if (deleted)
@@ -69,7 +86,11 @@ namespace TweetAPI.Controllers.v1
         [HttpPost(APIRoutes.Posts.Create)]
         public async Task<IActionResult> Create([FromBody]CreatePostRequest postReq)
         {
-            Post post = new Post { Name = postReq.Name };
+            //User.FindFirst(ClaimTypes.NameIdentifier)
+            var post = new Post { 
+                Name = postReq.Name,
+                UserId = HttpContext.GetUserId()
+            };
 
             //CHANGE LATER
             await _postService.CreatePostAsync(post);
@@ -78,6 +99,7 @@ namespace TweetAPI.Controllers.v1
             string locationUrl = baseUrl + "/" + APIRoutes.Posts.Get.Replace("{postId}", post.Id.ToString());
 
             var res = new PostResponse { Id = post.Id };
+
             return Created(locationUrl, res);
         }
 

@@ -6,9 +6,9 @@ namespace TweetAPI.Services
 {
     public class PostService : IPostService
     {
-        private readonly DBContext _dataContext;
+        private readonly DataContext _dataContext;
 
-        public PostService(DBContext dataContext)
+        public PostService(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
@@ -18,7 +18,7 @@ namespace TweetAPI.Services
             return await _dataContext.Posts.ToListAsync();
         }
 
-        public async Task<Post?> GetPostByIdAsync(Guid postId)
+        public async Task<Post> GetPostByIdAsync(Guid postId)
         {
             return await _dataContext.Posts.SingleOrDefaultAsync(x => x.Id == postId);
         }
@@ -52,6 +52,13 @@ namespace TweetAPI.Services
             var created = await _dataContext.SaveChangesAsync();
 
             return created > 0;
+        }
+
+        public async Task<bool> CorrectUserAsync(Guid postId, string userId)
+        {
+            var post = await _dataContext.Posts.AsNoTracking().SingleOrDefaultAsync(x => x.Id == postId);
+
+            return post != null && post.UserId == userId;
         }
     }
 }

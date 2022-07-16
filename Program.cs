@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TweetAPI.Config;
@@ -20,6 +21,7 @@ else
 {
     app.UseHsts();
 }
+    
 
 SwaggerOptions swagConfig = new SwaggerOptions();
 builder.Configuration.GetSection(nameof(SwaggerOptions)).Bind(swagConfig);

@@ -4,14 +4,15 @@ using TweetAPI.Domain;
 
 namespace TweetAPI.Data
 {
-    public class DBContext : IdentityDbContext
+    public class DataContext : IdentityDbContext
     {
-        public DBContext(DbContextOptions<DBContext> options)
+        public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
 
         }
 
         public DbSet<Post> Posts { get; set; }
+
     }
 }

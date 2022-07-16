@@ -14,17 +14,15 @@ namespace TweetAPI.Installers
     {
         public static void ServicesInit(this IServiceCollection services, IConfiguration config)
         {
-            //Add services to the container.
-            string? connectionString = config.GetConnectionString("DefaultConnection");
+            string connectionString = config.GetConnectionString("DefaultConnection");
 
 
-            services.AddDbContext<DBContext>(options =>
+            services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(connectionString));
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-
+            
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<DBContext>();
+                .AddEntityFrameworkStores<DataContext>();
 
             services.AddScoped<IPostService, PostService>();
 

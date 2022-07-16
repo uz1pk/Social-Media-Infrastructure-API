@@ -12,11 +12,29 @@ namespace TweetAPI.Services
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly JwtSettings _jwtSettings;
-         
+
+        private const string LoginErrorMessage = "Invalid Username or Password";
+
+
         public AuthService(UserManager<IdentityUser> manager, JwtSettings settings)
         {
             _userManager = manager;
             _jwtSettings = settings;
+        }
+
+        public async Task<AuthResult> LoginAsync(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+                return new AuthResult { Errors = new[] { LoginErrorMessage } };
+
+            var userCheckedPass = await _userManager.CheckPasswordAsync(user, password);
+
+            if (!userCheckedPass)
+                return new AuthResult { Errors = new[] { LoginErrorMessage } };
+
+            return UserAuthResult(user);
         }
 
         //Asynchronously register user and generate authetication token (jwt)
@@ -25,12 +43,7 @@ namespace TweetAPI.Services
             var exists = await _userManager.FindByEmailAsync(email);
 
             if (exists != null)
-            {
-                return new AuthResult
-                {
-                    Errors = new []{"Entered email is already in use"}
-                };
-            }
+                return new AuthResult { Errors = new[] { "Entered email is already in use" } };
 
             var newRegisteredUser = new IdentityUser
             {
@@ -42,16 +55,16 @@ namespace TweetAPI.Services
             var createdUser = await _userManager.CreateAsync(newRegisteredUser, password);
 
             if (!createdUser.Succeeded)
-            {
-                return new AuthResult
-                {
-                    Errors = createdUser.Errors.Select(x => x.Description)
-                };
-            }
+                return new AuthResult { Errors = createdUser.Errors.Select(x => x.Description) };
 
+            return UserAuthResult(newRegisteredUser);
+        }
+
+        private AuthResult UserAuthResult(IdentityUser User)
+        {
             var newhandler = new JwtSecurityTokenHandler();
             var tokenCredentialKey = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-            
+
             //Descriptor for the jwt token
             var tokenDesc = new SecurityTokenDescriptor
             {
@@ -59,15 +72,14 @@ namespace TweetAPI.Services
                 //This could be email, name, etc
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, newRegisteredUser.Email),
+                    new Claim(JwtRegisteredClaimNames.Sub, User.Email),
 
                     //Jti is a unique id for this jwt
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 
-                    new Claim(JwtRegisteredClaimNames.Email, newRegisteredUser.Email),
-                    new Claim("id", newRegisteredUser.Id)
+                    new Claim(JwtRegisteredClaimNames.Email, User.Email),
+                    new Claim("id", User.Id)
                 }),
-
                 // Set token expiry
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenCredentialKey), SecurityAlgorithms.HmacSha256Signature)
@@ -75,11 +87,11 @@ namespace TweetAPI.Services
 
             var generatedToken = newhandler.CreateToken(tokenDesc);
 
-            return new AuthResult
-            {
-                Success = true,
-                Token = newhandler.WriteToken(generatedToken)
+            return new AuthResult { 
+                Success = true, 
+                Token = newhandler.WriteToken(generatedToken) 
             };
         }
+
     }
 }
