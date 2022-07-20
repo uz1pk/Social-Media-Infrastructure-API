@@ -21,6 +21,8 @@
             public const string Login = BaseRoute + "/auth/login";
 
             public const string Register = BaseRoute + "/auth/register";
+
+            public const string Refresh = BaseRoute + "/auth/refresh";
         }   
 
     }

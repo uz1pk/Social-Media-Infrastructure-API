@@ -34,6 +34,7 @@ namespace TweetAPI.Controllers.v1
             return Ok(new AuthSuccessResponse
             {
                 Token = registrationResposne.Token,
+                RefreshToken = registrationResposne.RefreshToken
             });
         }
 
@@ -50,6 +51,24 @@ namespace TweetAPI.Controllers.v1
             return Ok(new AuthSuccessResponse
             {
                 Token = registrationResposne.Token,
+                RefreshToken = registrationResposne.RefreshToken
+            });
+        }
+
+        [HttpPost(APIRoutes.AuthRoutes.Refresh)]
+        public async Task<IActionResult> Login([FromBody] RefreshRequest req)
+        {
+            var registrationResposne = await _authService.RefreshAsync(req.Token, req.RefreshToken);
+
+            if (!registrationResposne.Success)
+            {
+                return BadRequest(new AuthFailureResponse { Errors = registrationResposne.Errors });
+            }
+
+            return Ok(new AuthSuccessResponse
+            {
+                Token = registrationResposne.Token,
+                RefreshToken = registrationResposne.RefreshToken
             });
         }
 

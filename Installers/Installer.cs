@@ -32,6 +32,18 @@ namespace TweetAPI.Installers
 
             services.AddScoped<IAuthService, AuthService>();
 
+            var tokenValidationPrep = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                RequireExpirationTime = false,
+                ValidateLifetime = true,
+            };
+
+            services.AddSingleton(tokenValidationPrep);
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -40,15 +52,7 @@ namespace TweetAPI.Installers
             }).AddJwtBearer(x =>
             {
                 x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    RequireExpirationTime = false,
-                    ValidateLifetime = true,
-                };
+                x.TokenValidationParameters = tokenValidationPrep;
             });
 
             services.AddSwaggerGen(swaggerOptions =>

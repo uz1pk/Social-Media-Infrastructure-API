@@ -7,5 +7,7 @@ namespace TweetAPI.Services
         Task<AuthResult> RegisterAsync(string email, string password);
 
         Task<AuthResult> LoginAsync(string email, string password);
+
+        Task<AuthResult> RefreshAsync(string token, string refreshToken);
     }
 }
