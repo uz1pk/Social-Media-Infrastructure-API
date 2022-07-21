@@ -12,7 +12,7 @@ using TweetAPI.Data;
 namespace TweetAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220720004442_init")]
+    [Migration("20220721005619_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
