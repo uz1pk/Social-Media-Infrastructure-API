@@ -30,6 +30,11 @@ namespace TweetAPI.Controllers.v1
         [HttpPut(APIRoutes.Posts.Update)]
         public async Task<IActionResult> Update([FromRoute]Guid postId, [FromBody] UpdatePostRequest request)
         {
+            if (String.IsNullOrEmpty(request.Name))
+            {
+                return BadRequest(new { error = "Post name cannot be empty" });
+            }
+
             var isCorrectUser = await _postService.CorrectUserAsync(postId, HttpContext.GetUserId());
 
             if (!isCorrectUser)
@@ -86,6 +91,11 @@ namespace TweetAPI.Controllers.v1
         [HttpPost(APIRoutes.Posts.Create)]
         public async Task<IActionResult> Create([FromBody]CreatePostRequest postReq)
         {
+            if (String.IsNullOrEmpty(postReq.Name))
+            {
+                return BadRequest(new { error = "Post name cannot be empty" });
+            }
+
             //User.FindFirst(ClaimTypes.NameIdentifier)
             var post = new Post { 
                 Name = postReq.Name,
