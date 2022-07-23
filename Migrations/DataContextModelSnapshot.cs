@@ -248,6 +248,7 @@ namespace TweetAPI.Migrations
             modelBuilder.Entity("TweetAPI.Domain.RefreshToken", b =>
                 {
                     b.Property<string>("Token")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreationDate")

@@ -17,16 +17,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMigrationsEndPoint();
 
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseMigrationsEndPoint();
-//}
-//else
-//{
-//    //app.UseHsts();
-//}
-    
-
 var swagConfig = new SwaggerOptions();
 builder.Configuration.GetSection(nameof(SwaggerOptions)).Bind(swagConfig);
 

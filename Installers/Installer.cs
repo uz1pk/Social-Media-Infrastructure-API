@@ -56,6 +56,8 @@ namespace TweetAPI.Installers
                 x.TokenValidationParameters = tokenValidationPrep;
             });
 
+            services.AddAuthorization();
+
             services.AddSwaggerGen(swaggerOptions =>
             {
                 swaggerOptions.SwaggerDoc("v1", new OpenApiInfo { Title = "Tweet REST API", Version = "v1" });

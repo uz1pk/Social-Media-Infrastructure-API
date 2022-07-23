@@ -12,7 +12,7 @@ using TweetAPI.Data;
 namespace TweetAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220721005619_init")]
+    [Migration("20220723024734_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -250,6 +250,7 @@ namespace TweetAPI.Migrations
             modelBuilder.Entity("TweetAPI.Domain.RefreshToken", b =>
                 {
                     b.Property<string>("Token")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreationDate")
