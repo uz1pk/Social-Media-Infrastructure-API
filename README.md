@@ -34,4 +34,4 @@ As a software engineer, we love thinking of new project ideas and applying them 
 
 ## REST API Endpoints
 <br>
-![Picture of all API Endpoints](https://github.com/uz1pk/Social-Media-Post-API/blob/master/Images/Structure.png?raw=true)
+[https://github.com/uz1pk/Social-Media-Post-API/blob/master/Images/Structure.png?raw=true](url)
