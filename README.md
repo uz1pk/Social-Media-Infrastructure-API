@@ -33,5 +33,4 @@ As a software engineer, we love thinking of new project ideas and applying them 
         - With proper HTTP Status Codes
 
 ## REST API Endpoints
-<br>
 ![This is an image](/Images/Structure.png)
