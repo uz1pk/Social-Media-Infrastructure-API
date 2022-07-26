@@ -1,11 +1,11 @@
 # Social-Media-Post-API
 
 ## Introduction
- Creating a new Social Media Platform for your startup? Need to mimic Social Media post logic and have a quick and easy place to store it securely? Or just looking for a fun API to test out. That is what my Social Media Post API is for, this simple yet completely secure API allows users to create accounts, which then in turn can create posts and perform full CRUD operations on them or search for posts.
+ Creating a new Social Media Platform for your startup? Need to mimic Social Media post logic and have a quick and easy place to store it securely? Or just looking for a fun API to test out? That is what my Social Media Post API is for. This Authenticated User RESTful API allows you to create accounts that can create posts, perform full CRUD operations, as well as Searching/Filtering of existing posts.
 
 
  ## Motivation
-As a software engineer, we love thinking of new project ideas and applying them in the best way possible. But one thing I noticed is that, despite the similarities between many projects (technology stack included) many projects end up having to develop certain components from the ground up. Because of this my idea for this project was to create a simple API which provides a very basic infrastructure for someone looking to create a social media platform, or simply for users who would like to play around with a REST API and get to know basics of web apps/services. Alongside this I chose to develop in a tech stack that I am working with at the time with my internship which to help further my understanding and gain experience.
+As a software engineer, we love thinking of new project ideas and applying them in the best way possible. But one thing I noticed is that despite the similarities between many projects, a lot of them end up having to develop components from scratch. Because of this my idea for this project was to create a simple API which provides a very basic infrastructure for someone looking to create a social media platform. Or simply for users who would like to play around with a RESTful API and get to know basics of web apps/services. I chose to develop in a tech stack that I am looking to get to know, improve on and become proficent in using.
 
 # Tech Stack
 
