@@ -60,7 +60,7 @@ namespace TweetAPI.Installers
 
             services.AddSwaggerGen(swaggerOptions =>
             {
-                swaggerOptions.SwaggerDoc("v1", new OpenApiInfo { Title = "Tweet REST API", Version = "v1" });
+                swaggerOptions.SwaggerDoc("v1", new OpenApiInfo { Title = "Social Media Post API", Version = "v1" });
 
                 //VERIFY SCHEME, CHECK THAT IT WORKS
                 swaggerOptions.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
