@@ -30,7 +30,7 @@ As a software engineer, we love thinking of new project ideas and applying them 
 - Dependency Injection Pattern
 - Repository design pattern
 - REST API Structure
- - With proper HTTP Status Codes
+ - HTTP Status Codes
 
 ## REST API Endpoints
 ![This is an image](/Images/Structure.png)
