@@ -34,6 +34,4 @@ As a software engineer, we love thinking of new project ideas and applying them 
 
 ## REST API Endpoints
 <br>
-<img src="images/Structure.png"
-     alt="A preview of the API"
-     style="float: left; margin-right: 10px;"/>
+![Picture of all API Endpoints](https://github.com/uz1pk/Social-Media-Post-API/blob/master/Images/Structure.png?raw=true)
