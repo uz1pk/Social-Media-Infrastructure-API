@@ -1,7 +1,7 @@
 # Social-Media-Post-API
 
 ## Introduction
- Creating a new Social Media Platform for your startup? Need to mimic Social Media post logic and have a quick and easy place to store it securely? Or just looking for a fun API to test out? That is what my Social Media Post API is for. This Authenticated User RESTful API allows you to create accounts that can create posts, perform full CRUD operations, as well as Searching/Filtering of existing posts.
+ Creating a new Social Media Platform for your startup? Need to mimic Social Media backend logic while having a secure place to store it? Or just looking for a fun API to test out? That is what my Social Media Post Platform is for. This Secure RESTful API, allows you to create accounts which can perform full CRUD operations on posts and search/filter existing posts.
 
 
  ## Motivation
