@@ -26,7 +26,7 @@ As a software engineer, we love thinking of new project ideas and applying them 
 
 # Architecture and Design
 - MVC Pattern
-- Entity Framework Core
+- Entity Framework
 - Dependency Injection Pattern
 - Repository Design pattern
 - REST API Structure
