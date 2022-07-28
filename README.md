@@ -21,8 +21,8 @@ As a software engineer, we love thinking of new project ideas and applying them 
 - Microsoft SQL Server
 
 ## Server
-- Azure (with MS SQL Server and Docker Image)
-- Docker (For program Image)
+- Azure (with Azure SQL Database and Docker Image)
+- Docker
 
 # Architecture and Design
 - MVC Pattern
