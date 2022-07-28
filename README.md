@@ -18,7 +18,8 @@ As a software engineer, we love thinking of new project ideas and applying them 
 ## Backend
 - **C#**
     - .NET 6 (includes ASP .NET Core)
-- Microsoft/Azure SQL Server
+- Microsoft SQL Server (Testing)
+- Azure SQL Server (Production)
 
 ## Server
 - Azure with Azure SQL Database
