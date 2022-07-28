@@ -31,6 +31,7 @@ As a software engineer, we love thinking of new project ideas and applying them 
 - Repository Design pattern
 - REST API Structure
 - HTTP Status Codes
+- User Authentication and Authorization
 
 ## REST API Endpoints
 ![This is an image](/Images/Structure.png)
