@@ -1,6 +1,6 @@
 No longer available, ran out of Azure creds : (
 
-# Social-Media-Post-API
+# Social-Media-Infrastructure-API
 
 ## Introduction
  Creating a new Social Media Platform for your startup? Need to mimic Social Media backend logic while having a secure place to store it? Or just looking for a fun API to test out? That is what my Social Media Post Platform is for. This Secure RESTful API, allows you to create accounts which can perform full CRUD operations on posts and search/filter existing posts.
