@@ -85,7 +85,7 @@ namespace TweetAPI.Controllers.v1
                 return NotFound();
             }
 
-            return Ok(postId);
+            return Ok(post);
         }
 
         [HttpPost(APIRoutes.Posts.Create)]
